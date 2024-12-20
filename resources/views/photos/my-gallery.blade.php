@@ -9,7 +9,7 @@
 <div class="max-w-7xl grid justify-center md:grid-cols-2 lg:grid-cols-3 gap-4">
     @foreach ($photos as $photo)
     <div class="bg-white rounded-lg shadow-lg">
-        <img src="{{ asset($photo->image_path) }}" alt="{{ $photo->title }}" class="rounded-t-lg">
+        <img src="{{ asset($photo->image_path) }}" alt="{{ $photo->title }}" class="w-[100%] rounded-t-lg">
         <div class="p-4">
             <h3 class="text-lg font-semibold">{{ $photo->title }}</h3>
             <p>Uploaded by: {{ $photo->user->name }}</p>

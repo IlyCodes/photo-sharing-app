@@ -15,7 +15,7 @@ $title = 'title';
                 <p class="font-semibold ml-2">{{ $photo->user->name }}</p>
             </a>
             <div class="h-max bg-white rounded-lg shadow-lg border border-gray-300">
-                <img src="{{ asset($photo->image_path) }}" alt="{{ $photo->title }}" class="rounded-t-lg">
+                <img src="{{ asset($photo->image_path) }}" alt="{{ $photo->title }}" class="w-[100%] rounded-t-lg">
                 <div class="p-2">
                     <h3 class="text-xl font-semibold">{{ $photo->title }}</h3>
                     <div class="mt-2 flex items-center space-x-2">
