@@ -36,7 +36,7 @@ class PhotoController extends Controller
         ]);
 
         $imageName = uniqid() . '.' . $request->image . $request->image->extension();
-        $imagePath = $request->image->move(public_path('photos'), $imageName);
+        $imagePath = $request->image->move(public_path('imgs'), $imageName);
 
         Photo::create([
             'title' => $request->title,
@@ -52,7 +52,8 @@ class PhotoController extends Controller
      */
     public function show($id)
     {
-        return view('photos.show', $id);
+        $photo = Photo::find($id);
+        return view('photos.show', compact('photo'));
     }
 
     /**
@@ -60,7 +61,8 @@ class PhotoController extends Controller
      */
     public function edit($id)
     {
-        return view('photos.edit', $id);
+        $photo = Photo::find($id);
+        return view('photos.edit', compact('photo'));
     }
 
     /**
@@ -69,12 +71,18 @@ class PhotoController extends Controller
     public function update(Request $request, $id)
     {
         $photo = Photo::find($id);
+        $old_photo = $photo->image_path;
+
         $request->validate([
             'title' => 'max:255',
         ]);
-        $photo->update($request->title);
 
-        return redirect()->back()-with('success', 'Photo updated successfully!');
+        $photo->update([
+            'title' => $request->title,
+            'image_path' => $old_photo
+        ]);
+
+        return redirect()->route('photos.index')->with('success', 'Photo updated successfully!');
     }
 
     /**
@@ -85,6 +93,12 @@ class PhotoController extends Controller
         $photo = Photo::find($id);
         $photo->delete();
 
-        return redirect()->back()-with('success', 'Photo deleted successfully!');
+        return redirect()->back()->with('success', 'Photo deleted successfully!');
+    }
+
+    public function myGallery()
+    {
+        $photos = Photo::where('user_id', Auth::id())->latest()->get();
+        return view('photos.my-gallery', compact('photos'));
     }
 }
