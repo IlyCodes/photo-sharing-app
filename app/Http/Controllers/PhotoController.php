@@ -35,9 +35,10 @@ class PhotoController extends Controller
             'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
 
-        $imageName = uniqid() . '.' . $request->image . $request->image->extension();
-        $imagePath = $request->image->move(public_path('imgs'), $imageName);
-
+        $imageName = uniqid() . '.' . $request->image->extension();
+        $imagePath = 'imgs/' . $imageName;
+        $request->image->move(public_path('imgs'), $imageName);
+        
         Photo::create([
             'title' => $request->title,
             'image_path' => $imagePath,
