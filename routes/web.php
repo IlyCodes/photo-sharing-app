@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('photos', PhotoController::class);
+    Route::get('/my-gallery', [PhotoController::class, 'myGallery'])->name('photos.my-gallery');
 });
 
 require __DIR__.'/auth.php';
