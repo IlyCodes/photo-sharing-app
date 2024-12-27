@@ -18,6 +18,10 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'spec-green': '#00a313',
+                'spec-red': '#fb4141'
+            }
         },
     },
 
