@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Photo;
+use App\Models\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,6 +15,18 @@ class PhotoController extends Controller
     public function index()
     {
         $photos = Photo::with('user', 'comments', 'votes')->latest()->get();
+        $votes = Vote::where('user_id', Auth::id())->get();
+        foreach ($photos as $photo) {
+            $photo->isUpvoted = $votes->contains(fn($vote) => $vote->photo_id == $photo->id && $vote->vote == "up");
+            $photo->isDownvoted = $votes->contains(fn($vote) => $vote->photo_id == $photo->id && $vote->vote == "down");
+            $photo->count_upvotes = '';
+            $count_upvotes = Vote::where('vote', 'up')->where('photo_id', $photo->id)->count();
+
+            if ($count_upvotes > 0) {
+                $photo->count_upvotes = $count_upvotes;
+            }
+        };
+
         return view('photos.index', compact('photos'));
     }
 
@@ -38,7 +51,7 @@ class PhotoController extends Controller
         $imageName = uniqid() . '.' . $request->image->extension();
         $imagePath = 'imgs/' . $imageName;
         $request->image->move(public_path('imgs'), $imageName);
-        
+
         Photo::create([
             'title' => $request->title,
             'image_path' => $imagePath,
@@ -54,7 +67,9 @@ class PhotoController extends Controller
     public function show($id)
     {
         $photo = Photo::find($id);
-        return view('photos.show', compact('photo'));
+        $comments = $photo->comments;
+
+        return view('photos.show', compact('photo', 'comments'));
     }
 
     /**
@@ -83,7 +98,7 @@ class PhotoController extends Controller
             'image_path' => $old_photo
         ]);
 
-        return redirect()->route('photos.index')->with('success', 'Photo updated successfully!');
+        return redirect()->route('photos.show', $photo->id)->with('success', 'Photo updated successfully!');
     }
 
     /**
@@ -94,7 +109,7 @@ class PhotoController extends Controller
         $photo = Photo::find($id);
         $photo->delete();
 
-        return redirect()->back()->with('success', 'Photo deleted successfully!');
+        return redirect()->route('photos.my-gallery')->with('success', 'Photo deleted successfully!');
     }
 
     public function myGallery()
