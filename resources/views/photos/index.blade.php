@@ -20,6 +20,7 @@ $title = 'title';
                 <img src="{{ asset($photo->image_path) }}" alt="{{ $photo->title }}" class="w-[500px] h-[400px] bg-black object-contain rounded-t-lg">
                 <div class="p-2">
                     <h3 class="text-xl font-semibold">{{ $photo->title }}</h3>
+                    @auth
                     <div class="mt-2 flex items-center space-x-2">
                         <form class="voteForm flex items-center space-x-2">
                             @csrf
@@ -51,6 +52,37 @@ $title = 'title';
                             </svg>
                         </button>
                     </div>
+                    @else
+                    <div class="mt-2 flex items-center space-x-2">
+                        <form action="{{ route('login') }}" class="voteForm flex items-center space-x-2 hover:blur-[2px]">
+                            <button type="submit">
+                                <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#00a313">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path d="M4 14h4v7a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7h4a1.001 1.001 0 0 0 .781-1.625l-8-10c-.381-.475-1.181-.475-1.562 0l-8 10A1.001 1.001 0 0 0 4 14z"></path>
+                                    </g>
+                                </svg>
+                            </button>
+
+                            <button type="submit">
+                                <svg class="w-7 h-7" fill='none' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#fb4141">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path d="M20.901 10.566A1.001 1.001 0 0 0 20 10h-4V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v7H4a1.001 1.001 0 0 0-.781 1.625l8 10a1 1 0 0 0 1.562 0l8-10c.24-.301.286-.712.12-1.059z"></path>
+                                    </g>
+                                </svg>
+                            </button>
+
+                            <button type="submit">
+                                <svg class="w-8 h-8 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 10.5h.01m-4.01 0h.01M8 10.5h.01M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.6a1 1 0 0 0-.69.275l-2.866 2.723A.5.5 0 0 1 8 18.635V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                    @endauth
                     <div id="{{ $photo->id }}" class="hidden">
                         <form action="{{ route('comments.store', $photo->id) }}" method="post">
                             @csrf
