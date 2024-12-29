@@ -5,17 +5,31 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return to_route('photos.index');
+})->name('/');
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+ 
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect()->route('photos.index');
+})->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::resource('photos', PhotoController::class)->only('index');
+
 Route::middleware('auth')->group(function () {
-    Route::resource('photos', PhotoController::class);
+    Route::resource('photos', PhotoController::class)->except('index');
     Route::get('/my-gallery', [PhotoController::class, 'myGallery'])->name('photos.my-gallery');
 
     Route::post('/new-comment/{photo_id}', [CommentController:: class, 'store'])->name('comments.store');
