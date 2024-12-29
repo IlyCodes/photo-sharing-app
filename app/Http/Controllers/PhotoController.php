@@ -14,7 +14,7 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $photos = Photo::with('user', 'comments', 'votes')->latest()->get();
+        $photos = Photo::inRandomOrder()->get();
         $votes = Vote::where('user_id', Auth::id())->get();
         foreach ($photos as $photo) {
             $photo->isUpvoted = $votes->contains(fn($vote) => $vote->photo_id == $photo->id && $vote->vote == "up");
