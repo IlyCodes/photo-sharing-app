@@ -28,6 +28,9 @@ class PhotoController extends Controller
             }
         };
 
+        if($photos->isEmpty()){
+            return redirect()->route('login');
+        }
         return view('photos.index', compact('photos'));
     }
 
