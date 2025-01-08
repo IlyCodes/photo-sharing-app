@@ -6,6 +6,7 @@ use App\Models\Photo;
 use App\Models\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class PhotoController extends Controller
 {
@@ -67,7 +68,7 @@ class PhotoController extends Controller
     public function show($id)
     {
         $photo = Photo::find($id);
-        $comments = $photo->comments;
+        $comments = $photo->comments->sortDesc();
 
         return view('photos.show', compact('photo', 'comments'));
     }
@@ -107,7 +108,14 @@ class PhotoController extends Controller
     public function destroy($id)
     {
         $photo = Photo::find($id);
-        $photo->delete();
+        if (isset($photo)) {
+            $path = $photo->image_path;
+            $photo->delete();
+            
+            if (File::exists($path)) {
+                File::delete($path);
+            };
+        };
 
         return redirect()->route('photos.my-gallery')->with('success', 'Photo deleted successfully!');
     }
