@@ -2,7 +2,7 @@
 @if($slot != "")
 <img src="{{ asset($slot) }}" alt="user_img" {{ $attributes->merge(['class' => 'w-10 h-10 border border-gray-800 rounded-full shadow-md']) }}>
 @else
-<svg {{ $attributes->merge(['class' => 'w-10 h-10 border border-gray-300 p-2 rounded-full shadow-md']) }} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32" xml:space="preserve">
+<svg {{ $attributes->merge(['class' => 'w-10 h-10 bg-white border border-gray-300 p-2 rounded-full shadow-md']) }} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32" xml:space="preserve">
     <style>
         .st1 {
             fill: #333

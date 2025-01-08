@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +12,7 @@ class CommentController extends Controller
         $request->validate([
             'text' => 'max:255'
         ]);
-        
+
         Comment::create([
             'text' => $request->comment,
             'user_id' => Auth::user()->id,

@@ -6,13 +6,12 @@
 
 @section('content')
 
-
-<div class="md:fixed md:inset-40 h-screen grid lg:grid-cols-2 justify-center space-x-6 overflow-y-auto scrollbar-hide">
+<div class="md:fixed md:inset-40 h-screen grid lg:grid-cols-2 justify-center space-x-12 overflow-y-auto scrollbar-hide">
     <div class="max-w-xl h-max bg-white rounded-lg shadow-lg">
-        <img src="{{ asset($photo->image_path) }}" alt="{{ $photo->title }}" class="w-[500px] h-[400px] bg-black object-contain object-center rounded-t-lg w-full">
+        <img src="{{ asset($photo->image_path) }}" alt="{{ $photo->title }}" class="w-[500px] h-[400px] bg-black object-contain object-center rounded-t-lg lg:w-full">
         <div class="p-4">
             <h1 class="text-2xl font-bold mb-2">{{ $photo->title }}</h1>
-            <p class="text-sm text-gray-500">Uploaded on: {{ $photo->created_at ? $photo->created_at->format('F j, Y') : '' }}</p>
+            <p class="text-sm text-gray-500">{{ $photo->created_at ? $photo->created_at->format('j F Y') : '' }}</p>
             <div class="flex items-center justify-between mt-4">
                 <a href="{{ route('photos.index') }}" class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-4 py-2">Back to Gallery</a>
                 @if(Auth::id() == $photo->user_id)
@@ -39,7 +38,7 @@
 
         <div class="h-screen pb-64 overflow-y-auto scrollbar-hide">
             @foreach($comments as $comment)
-            <div class="h-max relative bg-white border border-gray-300 rounded-lg p-2 mb-2 shadow-md">
+            <div class="h-max relative bg-white border border-gray-300 rounded-lg p-2 mb-4 shadow-md">
                 <div>
                     <a href="" class="inline-flex items-baseline">
                         <x-profile-image class="self-center mx-1">

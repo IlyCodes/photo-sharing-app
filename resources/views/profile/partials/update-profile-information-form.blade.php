@@ -32,7 +32,8 @@
                 <path d="M12.04 10.54c-.543 0-.988-.435-1-.98a4.964 4.964 0 0 1 1.394-3.564 4.968 4.968 0 0 1 3.505-1.535c.562.01 1.009.428 1.02.98a1 1 0 0 1-.98 1.02 2.982 2.982 0 0 0-2.103.92 2.981 2.981 0 0 0-.836 2.139 1 1 0 0 1-.98 1.02h-.02z" style="fill:#008ad0" />
             </svg>
             @endif
-            <input id="image" name="image" type="file" class="mt-1 block w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" :value="old('image', $user->image)" />
+            <x-text-input id="image" name="image" type="file" class="mt-1 block w-full border border-gray-300" :value="old('image', $user->image)" />
+            
             <x-input-error class="mt-2" :messages="$errors->get('image')" />
         </div>
 

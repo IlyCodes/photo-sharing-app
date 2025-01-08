@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Photo;
 use App\Models\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class VoteController extends Controller
 {
@@ -32,7 +30,6 @@ class VoteController extends Controller
             'photo_id' => $photo_id,
         ]);
 
-        // return response()->json(['new vote clicked' => true]);
     }
 
     public function update(Vote $vote, string $voteType)
@@ -43,7 +40,6 @@ class VoteController extends Controller
                 'user_id' => $vote->user_id,
                 'photo_id' => $vote->photo_id,
             ]);
-            // return response()->json(['btn_clicked' => 'false']);
 
         } else {
             $vote->update([
@@ -51,7 +47,6 @@ class VoteController extends Controller
                 'user_id' => $vote->user_id,
                 'photo_id' => $vote->photo_id,
             ]);
-            // return response()->json(['clicked' => true]);
         }
     }
 }

@@ -4,7 +4,7 @@ window.onload = () => {
     let posts = document.querySelector('.posts');
     posts.addEventListener('click', handleVote);
     let form;
-
+    
     function handleVote(e) {
         let button = e.target.closest('.vote-btn');
 
@@ -53,7 +53,7 @@ window.onload = () => {
                 counter.innerHTML = counter.dataset.value == '' ? '' : parseInt(counter.innerHTML) - parseInt(1);
             }
         }
-        
+
         sendVote(vote, photo_id);
     }
 

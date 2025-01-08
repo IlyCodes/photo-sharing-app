@@ -11,7 +11,7 @@
                 <div class="p-6 text-center text-gray-900 dark:text-gray-100">
                     <div class="flex justify-between items-center">
                         <div class="grid text-5xl font-semibold">
-                            60
+                            {{ $photos}}
                             <span class="text-base text-gray-500 font-light">Total Photos</span>
                         </div>
                         <svg class="w-20 h-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
@@ -25,7 +25,7 @@
                 <div class="p-6 text-center text-gray-900 dark:text-gray-100">
                     <div class="flex justify-between items-center">
                         <div class="grid text-5xl font-semibold">
-                            1460
+                            {{ $comments}}
                             <span class="text-base text-gray-500 font-light">Total Comments</span>
                         </div>
                         <svg class="w-20 h-20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -38,7 +38,7 @@
                 <div class="p-6 text-center text-gray-900 dark:text-gray-100">
                     <div class="flex justify-between items-center">
                         <div class="grid text-5xl font-semibold">
-                            560
+                            {{ $votes}}
                             <span class="text-base text-gray-500 font-light">Total Votes</span>
                         </div>
                         <svg class="w-20 h-20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
