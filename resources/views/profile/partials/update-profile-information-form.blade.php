@@ -20,7 +20,7 @@
         <div>
             <x-input-label for="image" :value="__('Image')" />
             @if($user->image)
-            <img src="{{ asset($user->image) }}" alt="user_img" class="w-16 h-16 border border-gray-300 m-2 rounded-full shadow-md">
+            <img src="{{ asset($user->image) }}" alt="user_img" class="w-[48px] h-[48px] object-cover border border-gray-300 m-2 rounded-full shadow-md">
             @else
             <svg class="w-16 h-16 border border-gray-300 m-2 p-2 rounded-full shadow-md" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32" xml:space="preserve">
                 <style>
